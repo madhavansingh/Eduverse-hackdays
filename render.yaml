@@ -1,0 +1,74 @@
+services:
+  - type: web
+    name: eduverse-backend
+    runtime: node
+    region: oregon          # Change to: frankfurt, singapore, ohio, virginia
+    plan: starter           # Use: standard for production workloads
+    rootDir: backend
+    # Run migrations then start — same as the Docker CMD
+    buildCommand: npm install && npm run build
+    startCommand: node scripts/migrate.js && node dist/main.js
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # NOTE: Do NOT set PORT here — Render injects it automatically at runtime.
+      # Your NestJS main.ts already reads process.env.PORT.
+
+      # ─── Set these in the Render Dashboard → Environment tab ─────────────
+      # DO NOT commit real values in this file.
+
+      - key: FRONTEND_URL
+        sync: false          # e.g. https://your-app.vercel.app
+
+      - key: BACKEND_URL
+        sync: false          # e.g. https://eduverse-backend.onrender.com
+
+      - key: DATABASE_URL
+        sync: false          # Supabase Transaction Pooler URL (port 6543)
+
+      - key: SUPABASE_URL
+        sync: false          # https://[ref].supabase.co
+
+      - key: SUPABASE_ANON_KEY
+        sync: false
+
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      - key: JWT_SECRET
+        generateValue: true  # Render generates a secure random value
+
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+
+      - key: JWT_EXPIRES_IN
+        value: 7d
+
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 30d
+
+      - key: GEMINI_API_KEY
+        sync: false
+
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+
+      - key: GOOGLE_REDIRECT_URI
+        sync: false          # https://your-api.onrender.com/api/v1/auth/oauth/google/callback
+
+      - key: CORS_ORIGINS
+        sync: false          # https://your-app.vercel.app (comma-separated for multiple)
+
+      - key: STORAGE_PROVIDER
+        value: supabase
+
+      - key: SUPABASE_STORAGE_BUCKET
+        value: eduverse-uploads

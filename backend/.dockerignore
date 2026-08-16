@@ -1,0 +1,52 @@
+# ─── Node ────────────────────────────────────────────────────────────────────
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── Environment files ───────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─── Build output (rebuilt inside Docker) ────────────────────────────────────
+dist
+build
+
+# ─── Stray / large generated files in backend root ───────────────────────────
+*.js
+# Keep scripts/ and migrations/ — they're COPY-d explicitly in Dockerfile
+
+# ─── Uploads (Supabase Storage used in production) ───────────────────────────
+uploads
+
+# ─── IDE / editor ────────────────────────────────────────────────────────────
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── Git ─────────────────────────────────────────────────────────────────────
+.git
+.gitignore
+.gitattributes
+
+# ─── Documentation ───────────────────────────────────────────────────────────
+README.md
+*.md
+
+# ─── Docker ──────────────────────────────────────────────────────────────────
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# ─── Tests / coverage ────────────────────────────────────────────────────────
+coverage
+.nyc_output
+*.log
+test
