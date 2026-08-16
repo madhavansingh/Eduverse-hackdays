@@ -1,3 +1,4 @@
+// Resolves the backend API base URL from the VITE_API_URL environment variable.
 const getBaseUrl = () => {
   const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:3010';
   const cleanUrl = rawUrl.replace(/\/+$/, '');
