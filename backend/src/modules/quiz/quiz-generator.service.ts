@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { AiService } from '../ai/ai.service';
 
+/** Supported question formats for AI-generated quizzes. */
 export type QuestionType = 'multiple_choice' | 'true_false' | 'short_answer' | 'fill_blank';
 
 export interface GeneratedQuestion {
